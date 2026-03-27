@@ -45,3 +45,27 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener("scroll", reveal);
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = "https://mansikhairnar003.github.io/thanks.html";
+        } else {
+            alert("Something went wrong!");
+        }
+    }).catch(error => {
+        alert("Error submitting form!");
+    });
+});
